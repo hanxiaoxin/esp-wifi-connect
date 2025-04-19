@@ -21,8 +21,10 @@
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT      BIT1
 
-extern const char index_html_start[] asm("_binary_wifi_configuration_html_start");
-extern const char done_html_start[] asm("_binary_wifi_configuration_done_html_start");
+extern const char index_html_start[] asm("_binary_index_html_start");
+extern const char index_css_start[] asm("_binary_index_css_start");
+extern const char index_js_start[] asm("_binary_index_js_start");
+extern const char eruda_js_start[] asm("_binary_eruda_js_start");
 
 WifiConfigurationAp& WifiConfigurationAp::GetInstance() {
     static WifiConfigurationAp instance;
@@ -176,16 +178,52 @@ void WifiConfigurationAp::StartWebServer()
     ESP_ERROR_CHECK(httpd_start(&server_, &config));
 
     // Register the index.html file
-    httpd_uri_t index_html = {
-        .uri = "/",
+    httpd_uri_t index_html = {.uri = "/",
+                              .method = HTTP_GET,
+                              .handler = [](httpd_req_t *req) -> esp_err_t {
+                                httpd_resp_set_type(req, "text/html");
+                                httpd_resp_send(req, index_html_start,
+                                                strlen(index_html_start));
+                                return ESP_OK;
+                              },
+                              .user_ctx = NULL};
+    ESP_ERROR_CHECK(httpd_register_uri_handler(server_, &index_html));
+
+    // Register the index.css file
+    httpd_uri_t index_css = {.uri = "/index.css",
+                             .method = HTTP_GET,
+                             .handler = [](httpd_req_t *req) -> esp_err_t {
+                               httpd_resp_set_type(req, "text/css");
+                               httpd_resp_send(req, index_css_start,
+                                               strlen(index_css_start));
+                               return ESP_OK;
+                             },
+                             .user_ctx = NULL};
+    ESP_ERROR_CHECK(httpd_register_uri_handler(server_, &index_css));
+
+    // Register the index.js file
+    httpd_uri_t index_js = {
+        .uri = "/index.js",
         .method = HTTP_GET,
         .handler = [](httpd_req_t *req) -> esp_err_t {
-            httpd_resp_send(req, index_html_start, strlen(index_html_start));
-            return ESP_OK;
+          httpd_resp_set_type(req, "application/javascript");
+          httpd_resp_send(req, index_js_start, strlen(index_js_start));
+          return ESP_OK;
         },
-        .user_ctx = NULL
-    };
-    ESP_ERROR_CHECK(httpd_register_uri_handler(server_, &index_html));
+        .user_ctx = NULL};
+    ESP_ERROR_CHECK(httpd_register_uri_handler(server_, &index_js));
+
+    // Register the index.js file
+    httpd_uri_t eruda_js = {
+        .uri = "/eruda.js",
+        .method = HTTP_GET,
+        .handler = [](httpd_req_t *req) -> esp_err_t {
+          httpd_resp_set_type(req, "application/javascript");
+          httpd_resp_send(req, eruda_js_start, strlen(eruda_js_start));
+          return ESP_OK;
+        },
+        .user_ctx = NULL};
+    ESP_ERROR_CHECK(httpd_register_uri_handler(server_, &eruda_js));
 
     // Register the /saved/list URI
     httpd_uri_t saved_list = {
@@ -364,18 +402,6 @@ void WifiConfigurationAp::StartWebServer()
         .user_ctx = this
     };
     ESP_ERROR_CHECK(httpd_register_uri_handler(server_, &form_submit));
-
-    // Register the done.html page
-    httpd_uri_t done_html = {
-        .uri = "/done.html",
-        .method = HTTP_GET,
-        .handler = [](httpd_req_t *req) -> esp_err_t {
-            httpd_resp_send(req, done_html_start, strlen(done_html_start));
-            return ESP_OK;
-        },
-        .user_ctx = NULL
-    };
-    ESP_ERROR_CHECK(httpd_register_uri_handler(server_, &done_html));
 
     // Register the reboot endpoint
     httpd_uri_t reboot = {

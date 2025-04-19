@@ -1,0 +1,276 @@
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+/* 开启状态 */
+input:checked+.slider {
+    background-color: #4CAF50;
+}
+
+input:checked+.slider::before {
+    transform: translateX(22px);
+}
+
+.card {
+    width: 100%;
+    z-index: 0;
+    border-radius: 12px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.001), rgba(0, 0, 0, 0.001)), #FFFFFF;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.label {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 280px;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+    color: #333;
+}
+
+.input-wrapper input:focus {
+    border-color: #2563EB;
+    /* Indigo */
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.input-wrapper .toggle-password {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: 8px;
+    right: 18px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAOdSURBVEiJ5VdNjtpIFP5elS3NkhuM5wRDTjD0CRqrk9UIBqu7kbLq5gRuThB2SJComGYZtYqcAOYEITdwbuBlJNv1ZoHLNsZA92SkLPJWlKvqve/9fa8AfnahlxyeKu25TtYmkn8wwwPQyrdiIkSZMV/cTKyCwI//VwBTpT3XRQjG4Jl6NwyMb3v+5rsAnDXMiHIt3jEgSYrgbeBHLwYwU7otJHRN+ZbZ/M2Z2AwDf1sH60jTJRKXADqVrZjZjG/7V5NnA5g/Pt0TiXfFB0ZkYMbD/tXiGOC9+0vdISCsAiHg4brnj88CmD3qgSCoUxeLYoT8HQAyNl+biq/uSJOuPQDvl7oLQNs1sxnVQ/dhqUMG7lF2QFU2MoVfBVJPZR1EAWDnFT5bxYYRDPv+wu4rpVuZxOcTBZejRpRkuKgW3qFuE9h0CnvIdaDsAWYzqhoHgMzFuybjRuAVkPkANrlLniuxVkoXEXob+BEDvl0LiHCqtFcAmD8+3aMsmFU97POl7hxpxXj4p7+96b1e3fT8C2JMLIhEmm714G3P3xDwUIB0EQKAUEq3iERoFcoUQd0KEf5qMI7Ca+tZhrHlBoFCZyHXPb/YB2MwVx87wji4Qx56AiaNNMpoN3yL6mCDwI9B2Fovq2mwYrIyFeQ4oWCUyrMUnxr95LziGZFhE3CaXtz0/d+awBJQENS3hk7JCcyeaTuGzSdBogsA0sFlZbOqNQJ2BXiOjJjggXe/fwEOAM6XuoPS6a0Y9q8WNi8MPNjqbAAAELy5+tg5Zlwp3QLDFt+mHiGldIu4JDkGxgIADExBDK5TEpGVJEFJHNJRTSCV0q1sd9e28kE6jURYEBJjknfGTt4vtQZ26JsoM2fAh3wZEzBhZF845RhStAnirsITm5uef1G9v0fxjEhmeBUEflwQUZJiVE3Fh6Xea6Mc0CpftnZgpCbHWROJkqQYUVLrjvlSd6rzhQmBTc/eLJgp3RYO1ijb8iAS+YAJUa9wRkTA6rrvj/Y9fxqI3UAqWLZKdAfTMB+la5QnFjLBqF5QM6XbkKYNAJSZ6DZ4s6nrqqXt/DSsgSgKCmceFXWZPT4NBERYnR3Pfg9YmSrtuRLr2gCKibBgzv5JUrm1E2+qtOcg9YTrXLJBd+8OI2JCcOx9ePJNqJRuGQd3J+b/aSEskgTj//Qm/A4gMQirc4ZfBKAqM6XbJE1HCPErl90SG2O+IjNbB872Jf8Lfrj8C++6yG4Rmk4WAAAAAElFTkSuQmCC");
+}
+
+.wifi {
+    width: 17.5px;
+    height: 14px;
+    margin-right: 8px;
+    z-index: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAYAAADr9QYhAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAKHSURBVEiJ7ZY/ctpAFMZ/T4iMuygFnnG3mcE9NzA+QeITWMbpsU9gcwKT3oPJCYxPYHID91CoYyYqUDpPkPalgGH4IwmQ8aTJV670vv3t251vF/4rXbJrgfHHnstrDcetAR/FwUPFA1DVAPitYoMk+dAPup+ivcNU/VFdSuVz1NYRMVu7qwY40lN4Gt5X+oVhjD8yruOeC+rvBJCtSJV2bN3vWR1Lhak2wputIaZbM3Pb4v8cqCUY449M2Sk9Z5kq9FGesPFLzMFL2gqNP/ZcN65hqYnwBahnLUIduVjcvjlMtRHeiHCbVgS0JjbpB92jIGO1mTL+2HOduCnCFeCt23M77FRac5jjRnjH9Oc1iEHnsLsrwM5QSnvQqVxL9TJ8FPi6XCrdSTJpFenEVlCl+GFtTqUtx5ehLo0p18NOpb1viFVVG+GVCHcLQ5HMt0g1wHI26B6+5JkYf+yVSn/qjjgnqtQEPFQ9RCKFQJAItT8nttzbFHrVb2FdlEfAU+VWphOMDBxEecXGH5lyqXwD6m+/fvoqtPICz/hjD169oHsUbEzgghBrUJMkvth0BnNhqt/Culh9yM0dQJBAUU/AALUMu0iFs7wuZcLM9vM5paRrSZ6yLsL5mcJpkhJ4KpxmAblZMFhOllBVg4lNTje1egbYA3qzBd2x2C1LjVlHV+VkmcY2/jG/d5T2oHP4edfcGd5X+pPEPUWZRoVqENu4t4vHkqan/e3al88WE43MPnx2fuktauWpEanSekt6F4ZJifOpVC+KXq6ZB3iTBG2mf5D08feEyXnVZY1vVGEYzcgKIPeizVPxbUr0GlhN4IjpeDHPooUAx/6vGiWnqagRJHivB9k/0V/8m0FKF5YhtAAAAABJRU5ErkJggg==");
+}
+
+.no-wifi {
+    width: 17.5px;
+    height: 14px;
+    margin-right: 8px;
+    z-index: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAYAAADr9QYhAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAAAKHSURBVEiJ7ZY/ctpAFMZ/T4iMuygFnnG3mcE9NzA+QeITWMbpsU9gcwKT3oPJCYxPYHID91CoYyYqUDpPkPalgGH4IwmQ8aTJV670vv3t251vF/4rXbJrgfHHnstrDcetAR/FwUPFA1DVAPitYoMk+dAPup+ivcNU/VFdSuVz1NYRMVu7qwY40lN4Gt5X+oVhjD8yruOeC+rvBJCtSJV2bN3vWR1Lhak2wputIaZbM3Pb4v8cqCUY449M2Sk9Z5kq9FGesPFLzMFL2gqNP/ZcN65hqYnwBahnLUIduVjcvjlMtRHeiHCbVgS0JjbpB92jIGO1mTL+2HOduCnCFeCt23M77FRac5jjRnjH9Oc1iEHnsLsrwM5QSnvQqVxL9TJ8FPi6XCrdSTJpFenEVlCl+GFtTqUtx5ehLo0p18NOpb1viFVVG+GVCHcLQ5HMt0g1wHI26B6+5JkYf+yVSn/qjjgnqtQEPFQ9RCKFQJAItT8nttzbFHrVb2FdlEfAU+VWphOMDBxEecXGH5lyqXwD6m+/fvoqtPICz/hjD169oHsUbEzgghBrUJMkvth0BnNhqt/Culh9yM0dQJBAUU/AALUMu0iFs7wuZcLM9vM5paRrSZ6yLsL5mcJpkhJ4KpxmAblZMFhOllBVg4lNTje1egbYA3qzBd2x2C1LjVlHV+VkmcY2/jG/d5T2oHP4edfcGd5X+pPEPUWZRoVqENu4t4vHkqan/e3al88WE43MPnx2fuktauWpEanSekt6F4ZJifOpVC+KXq6ZB3iTBG2mf5D08feEyXnVZY1vVGEYzcgKIPeizVPxbUr0GlhN4IjpeDHPooUAx/6vGiWnqagRJHivB9k/0V/8m0FKF5YhtAAAAABJRU5ErkJggg==");
+}
+
+.ap-list-item {
+    width: 100%;
+    height: 62px;
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    border-color: #F3F4F6;
+}
+
+.info {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.wifi-signal {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    width: fit-content;
+    height: 20px;
+}
+
+.wifi-bar {
+    width: 4px;
+    background-color: #ccc;
+    opacity: 0.3;
+    transition: 0.3s;
+}
+
+.wifi-bar.level-1 {
+    height: 5px;
+}
+
+.wifi-bar.level-2 {
+    height: 9px;
+}
+
+.wifi-bar.level-3 {
+    height: 13px;
+}
+
+.wifi-bar.level-4 {
+    height: 17px;
+}
+
+.wifi-bar.active {
+    background-color: #4CAF50;
+    opacity: 1;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #2563EB;
+    /* 主色 */
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background-color: #1d4ed8;
+    /* hover 更深一点 */
+    box-shadow: 0 6px 14px rgba(67, 56, 202, 0.4);
+}
+
+.btn:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 6px rgba(29, 78, 216, 0.25);
+}
+
+.btn:focus {
+    outline: 3px solid rgba(37, 99, 235, 0.5);
+}
+
+.message-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message-box {
+    min-width: 200px;
+    max-width: 320px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slide-in 0.3s ease, fade-out 0.3s ease 2.5s;
+    opacity: 1;
+    pointer-events: none;
+}
+
+.message-success {
+    background-color: #2563EB;
+}
+
+/* 主色调 */
+.message-error {
+    background-color: #DC2626;
+}
+
+/* 红色 */
+.message-info {
+    background-color: #3B82F6;
+}
+
+/* 天蓝 */
+.message-warning {
+    background-color: #F59E0B;
+}
+
+/* 橙黄 */
+
+@keyframes slide-in {
+    from {
+        transform: translateY(-20px);
+        /* 只做上下偏移 */
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WIFI 配置</title>
+    <link rel="stylesheet" href="./index.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #F9FAFB;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: #F9FAFB;
+        }
+
+        .header {
+            width: 100%;
+            height: 56px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background: #2563EB;
+            padding: 0 16px;
+        }
+
+        .title {
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 28px;
+            letter-spacing: normal;
+            color: #FFFFFF;
+        }
+
+        .content {
+            padding: 16px 16px 24px 16px;
+        }
+
+        .status {
+            width: calc(100% - 32px);
+            height: 84px;
+            display: flex;
+            padding: 16px;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .ap {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: normal;
+            letter-spacing: normal;
+            color: #111827;
+        }
+
+        .station {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            color: #4B5563;
+            margin-top: 10px;
+            align-items: center;
+            height: 30px;
+        }
+
+        .disconnect {
+            display: flex;
+            height: 100%;
+            align-items: center;
+        }
+
+        .connected {
+            display: none;
+            height: 100%;
+            align-items: center;
+        }
+
+        .online .connected {
+            display: flex;
+        }
+
+        .online .disconnect {
+            display: none;
+        }
+
+        .ap-list {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .bar {
+            width: 100%;
+            height: 22px;
+            display: flex;
+            flex-direction: row;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 500;
+            align-items: center;
+            border-width: 0px 0px 1px 0px;
+            border-style: solid;
+            border-color: #F3F4F6;
+        }
+
+        .form {
+            width: calc(100% - 32px);
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 16px;
+            letter-spacing: normal;
+            color: #374151;
+        }
+
+        .ssid {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .password {
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .actions {
+            width: 100%;
+        }
+
+        .connect-btn {
+            margin-top: 20px;
+            width: calc(100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="message-container" class="message-container"></div>
+    <div class="container">
+        <div class="header">
+            <span class="title">WIFI 配置</span>
+        </div>
+        <div class="content">
+            <div class="status card">
+                <div class="ap">
+                    <span>WIFI 热点</span>
+                    <label class="switch">
+                        <input type="checkbox" checked id="ap-switch">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="station offline" id="station-status">
+                    <div class="connected">
+                        <div class="wifi"></div>
+                        <span>已连接到网络</span>
+                    </div>
+                    <div class="disconnect">
+                        <div class="no-wifi"></div>
+                        <span>未连接到网络</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form card input-wrapper">
+                <div class="ssid card">
+                    <label class="label" for="ssid">WIFI名称</label>
+                    <input class="input" type="text" value="" placeholder="请选择或输入WIFI名称" id="ssid" />
+                </div>
+                <div class="password">
+                    <label class="label" for="password">WIFI密码</label>
+                    <input class="input" type="password" value="" id="password" placeholder="请输入WIFI密码" />
+                    <div class="toggle-password" id="toggle"></div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <div class="btn connect-btn" id="submit">连接网络</div>
+            </div>
+
+            <div class="ap-list card" id="ap-list">
+                <div class="bar">
+                    <div>可用网络</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./eruda.js"></script>
+    <script>eruda.init();</script>
+    <script src="./index.js"></script>
+</body>
+
+</html>

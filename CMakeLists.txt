@@ -7,8 +7,10 @@ idf_component_register(
     INCLUDE_DIRS
         "include"
     EMBED_TXTFILES
-        "assets/wifi_configuration.html"
-        "assets/wifi_configuration_done.html"
+        "assets/index.html"
+        "assets/index.css"
+        "assets/index.js"
+        "assets/eruda.js"
     REQUIRES
     	"esp_timer"
         "esp_http_server"

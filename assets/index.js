@@ -147,6 +147,14 @@ function initSubmit() {
                     message.success('连接成功，设备将在3S内重启')
                     submitBtn.innerText = '已连接';
                     stationStatus.classList.add('online');
+
+                    setTimeout(() => {
+                        request('./reboot', {
+                            method: 'POST',
+                        }).then(() => {
+                            console.log('reboot done');
+                        })
+                    }, 3000);
                 } else {
                     message.success('连接失败')
                     submitBtn.innerText = '连接网络';
